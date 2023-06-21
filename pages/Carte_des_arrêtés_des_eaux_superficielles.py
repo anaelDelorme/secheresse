@@ -4,6 +4,9 @@ import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
+import warnings
+
+warnings.filterwarnings('ignore', 'GeoSeries.notna', UserWarning)
 
 st.set_page_config(page_title="Carte des arrêtés de sécheresse - eaux superficielles", page_icon="📈")
 
@@ -31,7 +34,7 @@ colonnes_selectionnees = ['id_zone',
                           'debut_validite_arrete',	
                           'fin_validite_arrete']
 gdf_selection = geo_merge.loc[:, colonnes_selectionnees]
-gdf_selection = gdf_selection[~gdf_selection['geometry'].is_empty & gdf_selection['geometry'].notna()]
+gdf_selection = gdf_selection[gdf_selection['geometry'].is_empty & gdf_selection['geometry'].notna()]
 
 colors = {'Vigilance': '#FAED93', 'Alerte': '#FAC939', 'Alerte renforcée': '#FA78C5', 'Crise': '#FA2048'}
 cmap = ListedColormap([colors[level] for level in sorted(colors.keys())])
