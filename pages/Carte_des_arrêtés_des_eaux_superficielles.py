@@ -31,7 +31,7 @@ colonnes_selectionnees = ['id_zone',
                           'debut_validite_arrete',	
                           'fin_validite_arrete']
 gdf_selection = geo_merge.loc[:, colonnes_selectionnees]
-gdf_selection = gdf_selection[~gdf['geometry'].is_empty & gdf['geometry'].notna()]
+gdf_selection = gdf_selection[~gdf_selection['geometry'].is_empty & gdf_selection['geometry'].notna()]
 
 colors = {'Vigilance': '#FAED93', 'Alerte': '#FAC939', 'Alerte renforcée': '#FA78C5', 'Crise': '#FA2048'}
 cmap = ListedColormap([colors[level] for level in sorted(colors.keys())])
