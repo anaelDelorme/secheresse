@@ -2,3 +2,5 @@ geopandas
 matplotlib
 folium
 mapclassify
+streamlit_folium
+pydeck
