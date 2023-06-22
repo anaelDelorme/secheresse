@@ -87,10 +87,9 @@ with st.spinner('Chargement en cours...'):
 
     data_pivot = data_agrege.pivot(index='annee', columns='nom_niveau', values='total_duree').reset_index()
 
-def format_with_space(value):
+def format_with_space(params):
+    value = params.value
     return "{:,.0f}".format(value).replace(",", " ")
-
-
 
 b = (
     Bar(
@@ -141,7 +140,7 @@ b = (
         # Configure other options for the chart (e.g., title, axis labels)
         xaxis_opts=opts.AxisOpts(name="Année"),
         yaxis_opts=opts.AxisOpts(name="Durée totale en nombre de jours",
-                                 axislabel_opts=opts.LabelOpts(formatter=lambda x: format_with_space(x))
+                                 axislabel_opts={"formatter": format_with_space}
                                  )  # Ajouter un espace comme délimiteur des milliers
 
     )
