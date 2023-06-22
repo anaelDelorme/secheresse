@@ -131,7 +131,7 @@ b = (
         data_pivot["Crise renforcée"].tolist(),
         stack= "Ad",
         color="#7A1023",
-    ).set_series_opts(label_opts=opts.LabelOpts(show=False)
+    ).set_series_opts(label_opts=opts.LabelOpts(formatter="")
     ).set_global_opts(
         # Configure other options for the chart (e.g., title, axis labels)
         title_opts=opts.TitleOpts(title="Durée cumulée des arrêtés de sécheresse en France", pos_bottom=True),
