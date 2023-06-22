@@ -136,7 +136,7 @@ b = (
         title_opts=opts.TitleOpts(title="Durée cumulée des arrêtés de sécheresse en France"),
         xaxis_opts=opts.AxisOpts(name="Année"),
         yaxis_opts=opts.AxisOpts(name="Durée totale en nombre de jours")
-    ).render()
+    )
 )
 
 st_pyecharts(b)
