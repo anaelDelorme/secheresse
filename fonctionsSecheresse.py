@@ -8,6 +8,20 @@ import warnings
 import folium
 import requests
 
+colonnes_selectionnees = ['id_zone',
+                                'code_zone',	
+                                'type_zone',
+                                'nom_zone' ,
+                                'geometry', 
+                                'numero_niveau',
+                                'nom_niveau',
+                                'id_arrete',
+                                'numero_arrete',
+                                'numero_arrete_cadre',
+                                'date_signature',	
+                                'debut_validite_arrete',	
+                                'fin_validite_arrete']
+
 @st.cache_data
 def recup_zones_actives():
     zones = gpd.read_file("data/active_zones_simplify.json")
@@ -25,20 +39,6 @@ def recup_data_arrete_du_jour():
         arretes = pd.read_csv(url)
         arretes_publie = arretes[arretes['statut_arrete'] == "Publié"]
         geo_merge = data_geo_simplify.merge(arretes_publie, on = 'id_zone')
-        colonnes_selectionnees = ['id_zone',
-                                'code_zone',	
-                                'type_zone',
-                                'nom_zone' ,
-                                'geometry', 
-                                'numero_niveau',
-                                'nom_niveau',
-                                'id_arrete',
-                                'numero_arrete',
-                                'numero_arrete_cadre',
-                                'date_signature',	
-                                'debut_validite_arrete',	
-                                'fin_validite_arrete']
-
         gdf_selection = geo_merge.loc[:, colonnes_selectionnees]
         gdf_non_vide = gdf_selection[~gdf_selection['geometry'].is_empty & gdf_selection['geometry'].notna()].dropna(subset=['geometry'])
         gdf_sup = gdf_non_vide[gdf_non_vide['type_zone'] == type]
