@@ -57,7 +57,7 @@ def create_carte_jour(type):
                 opacity=0.9,
                 direction='right',
             )).add_to(m)
-        folium_static(m)
+        return(m)
     else:
         print("Erreur : Le fichier des arrêtés n'est pas accessible sur le site data.gouv.fr.")
     
