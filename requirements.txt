@@ -4,3 +4,4 @@ folium
 mapclassify
 streamlit_folium
 pydeck
+pyecharts
