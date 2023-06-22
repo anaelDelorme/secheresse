@@ -60,5 +60,4 @@ def create_carte_jour(type):
         return(m)
     else:
         print("Erreur : Le fichier des arrêtés n'est pas accessible sur le site data.gouv.fr.")
-    
-    
+

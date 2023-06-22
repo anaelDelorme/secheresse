@@ -31,5 +31,5 @@ st.markdown(
 )
 with st.spinner('Chargement en cours...'):
     carte = fonctionsSecheresse.create_carte_jour(type = "SOU")
-    folium_static(carte)
+    st.markdown(carte._repr_html_(), unsafe_allow_html=True)
         
