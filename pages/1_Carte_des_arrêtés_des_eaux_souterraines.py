@@ -7,7 +7,6 @@ from matplotlib.colors import ListedColormap
 import warnings
 import folium
 import requests
-import fonctionsSecheresse
 
 from streamlit_folium import folium_static
 
