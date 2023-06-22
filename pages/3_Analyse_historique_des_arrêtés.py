@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from pyecharts.charts import Bar
 from pyecharts import options as opts
 import requests
+from streamlit_echarts import st_pyecharts
+
 
 st.set_page_config(page_title="Analyse historique des arrêtés de sécheresse", page_icon="💦")
 
@@ -42,50 +44,50 @@ urls = {
     '2022' : "https://www.data.gouv.fr/fr/datasets/r/0fee8de1-c6de-4334-8daf-654549e53988",
     '2023' : "https://www.data.gouv.fr/fr/datasets/r/782aac32-29c8-4b66-b231-ab4c3005f574"
 }
+with st.spinner('Chargement en cours...'):
+    for key, value in urls.items():
+        # Création du nom de l'objet en concaténant "data_" avec la clé
+        nom_objet = "data_" + key
 
-for key, value in urls.items():
-    # Création du nom de l'objet en concaténant "data_" avec la clé
-    nom_objet = "data_" + key
+        # Création de l'objet avec le nom spécifié
+        globals()[nom_objet] = recup_data_arrete(value)
+        
+    def maj_dataframe(data_frame):
+        data_frame['debut_validite_arrete'] = pd.to_datetime(data_frame['debut_validite_arrete'])
+        data_frame['fin_validite_arrete'] = pd.to_datetime(data_frame['fin_validite_arrete'])
+        data_frame['duree_validite_arrete'] = (data_frame['fin_validite_arrete'] - data_frame['debut_validite_arrete']).dt.days
+        data_frame['annee'] = data_frame['debut_validite_arrete'].dt.year
+        data_frame = data_frame[['id_arrete', 'id_zone', 'annee', 'numero_niveau', 'nom_niveau', 'duree_validite_arrete']]
+        return(data_frame)
 
-    # Création de l'objet avec le nom spécifié
-    globals()[nom_objet] = recup_data_arrete(value)
-    
-def maj_dataframe(data_frame):
-    data_frame['debut_validite_arrete'] = pd.to_datetime(data_frame['debut_validite_arrete'])
-    data_frame['fin_validite_arrete'] = pd.to_datetime(data_frame['fin_validite_arrete'])
-    data_frame['duree_validite_arrete'] = (data_frame['fin_validite_arrete'] - data_frame['debut_validite_arrete']).dt.days
-    data_frame['annee'] = data_frame['debut_validite_arrete'].dt.year
-    data_frame = data_frame[['id_arrete', 'id_zone', 'annee', 'numero_niveau', 'nom_niveau', 'duree_validite_arrete']]
-    return(data_frame)
+    dataframes_maj = []
+    for annee in urls.keys():
+        # Récupération du DataFrame correspondant à l'année
+        df = globals().get(f'data_{annee}')
+        
+        # Vérification si le DataFrame existe
+        if df is not None:
+            # Application de la fonction maj_dataframe(df)
+            df_maj = maj_dataframe(df)
+                
+            # Ajout du DataFrame mis à jour à la liste
+            dataframes_maj.append(df_maj)
 
-dataframes_maj = []
-for annee in urls.keys():
-    # Récupération du DataFrame correspondant à l'année
-    df = globals().get(f'data_{annee}')
-    
-    # Vérification si le DataFrame existe
-    if df is not None:
-        # Application de la fonction maj_dataframe(df)
-        df_maj = maj_dataframe(df)
-             
-        # Ajout du DataFrame mis à jour à la liste
-        dataframes_maj.append(df_maj)
-
-# Concaténation de tous les DataFrames avec le suffixe "_maj"
-data_tous_arretes = pd.concat(dataframes_maj, axis=0)
-
-
-data_agrege = data_tous_arretes[data_tous_arretes['nom_niveau']!="Absence de restriction"].groupby(['annee','nom_niveau']).agg(
-        total_duree = ('duree_validite_arrete', 'sum'),
-        nombre_observations=('nom_niveau', 'size')
-    )
-
-data_agrege = data_agrege.reset_index(level = ['annee','nom_niveau'])
-
-data_pivot = data_agrege.pivot(index='annee', columns='nom_niveau', values='total_duree').reset_index()
+    # Concaténation de tous les DataFrames avec le suffixe "_maj"
+    data_tous_arretes = pd.concat(dataframes_maj, axis=0)
 
 
-(
+    data_agrege = data_tous_arretes[data_tous_arretes['nom_niveau']!="Absence de restriction"].groupby(['annee','nom_niveau']).agg(
+            total_duree = ('duree_validite_arrete', 'sum'),
+            nombre_observations=('nom_niveau', 'size')
+        )
+
+    data_agrege = data_agrege.reset_index(level = ['annee','nom_niveau'])
+
+    data_pivot = data_agrege.pivot(index='annee', columns='nom_niveau', values='total_duree').reset_index()
+
+
+b = (
     Bar(
         opts.InitOpts(
             #theme = ThemeType.DARK,
@@ -136,3 +138,5 @@ data_pivot = data_agrege.pivot(index='annee', columns='nom_niveau', values='tota
         yaxis_opts=opts.AxisOpts(name="Durée totale en nombre de jours")
     ).render()
 )
+
+st_pyecharts(b)
