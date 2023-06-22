@@ -34,7 +34,7 @@ with st.spinner('Chargement en cours...'):
     def recup_zones_actives():
         zones = gpd.read_file("data/active_zones_simplify.json")
         return(zones)
-    data_geo_simplify = Secheresse.recup_zones_actives()
+    data_geo_simplify = recup_zones_actives()
     
     @st.cache_data(ttl=86400)
     def recup_data_arrete_du_jour():
