@@ -9,7 +9,7 @@ import requests
 from streamlit_echarts import st_pyecharts
 
 
-st.set_page_config(page_title="Analyse historique des arrêtés de sécheresse", page_icon="💦")
+st.set_page_config(page_title="Analyse historique des arrêtés de sécheresse", page_icon="💦", layout="wide")
 
 st.markdown("# Analyse historique des arrêtés de sécheresse")
 st.sidebar.header(" Analyse historique")
@@ -131,12 +131,17 @@ b = (
         data_pivot["Crise renforcée"].tolist(),
         stack= "Ad",
         color="#7A1023",
+    ).set_series_opts(label_opts=opts.LabelOpts(show=False)
     ).set_global_opts(
         # Configure other options for the chart (e.g., title, axis labels)
-        title_opts=opts.TitleOpts(title="Durée cumulée des arrêtés de sécheresse en France"),
+        title_opts=opts.TitleOpts(title="Durée cumulée des arrêtés de sécheresse en France", pos_bottom=True),
         xaxis_opts=opts.AxisOpts(name="Année"),
         yaxis_opts=opts.AxisOpts(name="Durée totale en nombre de jours")
     )
 )
 
 st_pyecharts(b)
+
+
+fig = b.render_notebook()
+st.pyplot(fig, clear_figure=True, use_column_width=True, height=400)
