@@ -57,7 +57,7 @@ def style_function(feature):
 
 def create_carte_jour(type):
     gdf_sup = recup_data_arrete_du_jour()
-    if arretes != "pas de connexion":
+    if gdf_sup != "pas de connexion":
         latitude = 46.1
         longitude = 2.2
         m = folium.Map(location=[latitude, longitude], zoom_start=5)
