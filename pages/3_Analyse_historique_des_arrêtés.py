@@ -141,7 +141,8 @@ b = (
         # Configure other options for the chart (e.g., title, axis labels)
         xaxis_opts=opts.AxisOpts(name="Année"),
         yaxis_opts=opts.AxisOpts(name="Durée totale en nombre de jours",
-                                 axislabel_opts=opts.LabelOpts(formatter=opts.JsCode(lambda value: format_with_space(value))))  # Ajouter un espace comme délimiteur des milliers
+                                 axislabel_opts=opts.LabelOpts(formatter=opts.JsCode(lambda value: format_with_space(value)))
+                                 )  # Ajouter un espace comme délimiteur des milliers
 
     )
 )
