@@ -14,10 +14,10 @@ from streamlit_folium import folium_static
 
 warnings.filterwarnings('ignore', 'GeoSeries.notna', UserWarning)
 
-st.set_page_config(page_title="Carte des arrêtés de sécheresse - eaux sousterraines", page_icon="💦")
+st.set_page_config(page_title="Carte des arrêtés de sécheresse - eaux souterraines", page_icon="💦")
 
-st.markdown("# Eaux sousterraines")
-st.sidebar.header("Eaux sousterraines")
+st.markdown("# Eaux souterraines")
+st.sidebar.header("Eaux souterraines")
 st.markdown(
     """Cette carte présente l'ensemble des arrêtés de sécheresse à la date de jour sur les eaux souterraines.    
     Les arrêtés de sécheresse ont 4 niveaux d'alerte :      
