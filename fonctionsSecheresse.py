@@ -1,9 +1,22 @@
 @st.cache_data(ttl=86400)
-def create_carte_jour(type):
-    data_geo_simplify = gpd.read_file("data/active_zones_simplify.json")
+def recup_data_arrete_du_jour():
     url = "https://www.data.gouv.fr/fr/datasets/r/782aac32-29c8-4b66-b231-ab4c3005f574"
     response = requests.get(url)
     if response.status_code == 200:
+        return("pas de connexion")
+    else:
+        return(pd.read_csv(url))
+    
+@st.cache_data()
+def recup_zones_actives():
+    zones = gpd.read_file("data/active_zones_simplify.json")
+    return(zones)
+    
+def create_carte_jour(type):
+    data_geo_simplify = recup_zones_actives()
+    url = "https://www.data.gouv.fr/fr/datasets/r/782aac32-29c8-4b66-b231-ab4c3005f574"
+    arretes = recup_data_arrete_du_jour()
+    if arretes != "pas de connexion":
         arretes = pd.read_csv(url)
         arretes_publie = arretes[arretes['statut_arrete'] == "Publié"]
         geo_merge = data_geo_simplify.merge(arretes_publie, on = 'id_zone')
@@ -59,5 +72,6 @@ def create_carte_jour(type):
             )).add_to(m)
         return(m)
     else:
-        print("Erreur : Le fichier des arrêtés n'est pas accessible sur le site data.gouv.fr.")
+        return("erreur")
+        
 
