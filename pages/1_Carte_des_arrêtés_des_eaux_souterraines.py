@@ -34,5 +34,5 @@ with st.spinner('Chargement en cours...'):
     if carte != "erreur":
         print("Erreur : Le fichier des arrêtés n'est pas accessible sur le site data.gouv.fr.")
     else:
-        st.markdown(carte._repr_html_(), unsafe_allow_html=True)
+        folium_static(carte)
         
