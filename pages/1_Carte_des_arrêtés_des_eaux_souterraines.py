@@ -30,9 +30,23 @@ st.markdown(
     unsafe_allow_html=True
 )
 with st.spinner('Chargement en cours...'):
+    @st.cache_data
+    def recup_zones_actives():
+        zones = gpd.read_file("data/active_zones_simplify.json")
+        return(zones)
+    data_geo_simplify = Secheresse.recup_zones_actives()
     
-    data_geo_simplify = fonctionsSecheresse.recup_zones_actives()
-    arretes = fonctionsSecheresse.recup_data_arrete_du_jour()
+    @st.cache_data(ttl=86400)
+    def recup_data_arrete_du_jour():
+        url = "https://www.data.gouv.fr/fr/datasets/r/782aac32-29c8-4b66-b231-ab4c3005f574"
+        response = requests.get(url)
+        if response.status_code != 200:
+            return("pas de connexion")
+        else:
+            data = pd.read_csv(url)
+            return(data)
+        
+    arretes = recup_data_arrete_du_jour()
     arretes_publie = arretes[arretes['statut_arrete'] == "Publié"]
     geo_merge = data_geo_simplify.merge(arretes_publie, on = 'id_zone')
     colonnes_selectionnees = ['id_zone',
@@ -69,6 +83,15 @@ with st.spinner('Chargement en cours...'):
     for colonne in colonnes_tooltip:
         colonne_alias = colonne.replace("_", " ").capitalize()
         colonnes_tooltip_alias.append(colonne_alias)
+    
+    def style_function(feature):
+            alerte = feature["properties"]["nom_niveau"]
+            return {
+                "fillOpacity": 0.7,
+                "weight": 0,
+                "fillColor": couleur_map.get(alerte),
+                "color": "#D9D9D9"
+            }    
 
     folium.GeoJson(gdf_sup, style_function=style_function, tooltip=folium.features.GeoJsonTooltip(
                 fields=colonnes_tooltip,
