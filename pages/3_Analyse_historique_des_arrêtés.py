@@ -7,8 +7,7 @@ from pyecharts.charts import Bar
 from pyecharts import options as opts
 import requests
 from streamlit_echarts import st_pyecharts
-from functools import partial
-import locale
+
 
 
 st.set_page_config(page_title="Analyse historique des arrêtés de sécheresse", page_icon="💦", layout="wide")
@@ -88,6 +87,13 @@ with st.spinner('Chargement en cours...'):
 
     data_pivot = data_agrege.pivot(index='annee', columns='nom_niveau', values='total_duree').reset_index()
 
+def format_with_space(num):
+    parts = []
+    while num >= 1000:
+        num, r = divmod(num, 1000)
+        parts.append("{:03d}".format(r))
+    parts.append(str(num))
+    return " ".join(reversed(parts))
 
 b = (
     Bar(
@@ -138,7 +144,7 @@ b = (
         # Configure other options for the chart (e.g., title, axis labels)
         xaxis_opts=opts.AxisOpts(name="Année"),
         yaxis_opts=opts.AxisOpts(name="Durée totale en nombre de jours",
-                                 axislabel_opts=opts.LabelOpts(formatter=partial(format_with_space)))  # Ajouter un espace comme délimiteur des milliers
+                                 axislabel_opts=opts.LabelOpts(formatter=opts.JsCode("function (value) { return format_with_space(value); }")))  # Ajouter un espace comme délimiteur des milliers
 
     )
 )
