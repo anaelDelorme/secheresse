@@ -140,6 +140,6 @@ b = (
     )
 )
 
-st_pyecharts(b, height='600')
+st_pyecharts(b, height=600)
 
 
