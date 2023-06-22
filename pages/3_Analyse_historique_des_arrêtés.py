@@ -16,7 +16,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-@set_cache
+@st.cache_data
 def recup_data_arrete(url):
         response = requests.get(url)
         if response.status_code != 200:
