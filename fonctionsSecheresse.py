@@ -1,4 +1,4 @@
-@st.cache_data()
+@st.cache_data
 def recup_zones_actives():
     zones = gpd.read_file("data/active_zones_simplify.json")
     return(zones)
