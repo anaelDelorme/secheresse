@@ -64,7 +64,7 @@ with st.spinner('Chargement en cours...'):
 
     gdf_selection = geo_merge.loc[:, colonnes_selectionnees]
     gdf_non_vide = gdf_selection[~gdf_selection['geometry'].is_empty & gdf_selection['geometry'].notna()].dropna(subset=['geometry'])
-    gdf_sup = gdf_non_vide[gdf_non_vide['type_zone'] == "SUP"]
+    gdf_sup = gdf_non_vide[gdf_non_vide['type_zone'] == "SOU"]
 
     latitude = 46.1
     longitude = 2.2
