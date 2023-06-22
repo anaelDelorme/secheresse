@@ -31,8 +31,8 @@ st.markdown(
 )
 with st.spinner('Chargement en cours...'):
     
-    data_geo_simplify = recup_zones_actives()
-    arretes = recup_data_arrete_du_jour()
+    data_geo_simplify = fonctionsSecheresse.recup_zones_actives()
+    arretes = fonctionsSecheresse.recup_data_arrete_du_jour()
     arretes_publie = arretes[arretes['statut_arrete'] == "Publié"]
     geo_merge = data_geo_simplify.merge(arretes_publie, on = 'id_zone')
     colonnes_selectionnees = ['id_zone',
