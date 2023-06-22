@@ -131,7 +131,7 @@ b = (
         data_pivot["Crise renforcée"].tolist(),
         stack= "Ad",
         color="#7A1023",
-    ).set_series_opts(label_opts=opts.LabelOpts(formatter="")
+    ).set_series_opts(label_opts=opts.LabelOpts(is_show=False)
     ).set_global_opts(
         # Configure other options for the chart (e.g., title, axis labels)
         title_opts=opts.TitleOpts(title="Durée cumulée des arrêtés de sécheresse en France", pos_bottom=True),
@@ -140,8 +140,6 @@ b = (
     )
 )
 
-st_pyecharts(b)
+st_pyecharts(b, height='600')
 
 
-fig = b.render_notebook()
-st.pyplot(fig, clear_figure=True, use_column_width=True, height=400)
