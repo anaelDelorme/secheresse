@@ -14,7 +14,7 @@ st.set_page_config(page_title="Analyse historique des arrêtés de sécheresse",
 st.markdown("# Analyse historique des arrêtés de sécheresse")
 st.sidebar.header(" Analyse historique")
 st.markdown(
-    """## Evolution du nombre de jours annuels concernés par des arrêtés de sécheresse
+    """## Nombre de jours annuels concernés par des arrêtés de sécheresse
     """,
     unsafe_allow_html=True
 )
@@ -134,7 +134,6 @@ b = (
     ).set_series_opts(label_opts=opts.LabelOpts(is_show=False)
     ).set_global_opts(
         # Configure other options for the chart (e.g., title, axis labels)
-        title_opts=opts.TitleOpts(title="Durée cumulée des arrêtés de sécheresse en France", pos_bottom=True),
         xaxis_opts=opts.AxisOpts(name="Année"),
         yaxis_opts=opts.AxisOpts(name="Durée totale en nombre de jours")
     )
