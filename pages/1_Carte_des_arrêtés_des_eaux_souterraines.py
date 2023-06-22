@@ -30,6 +30,42 @@ st.markdown(
     unsafe_allow_html=True
 )
 with st.spinner('Chargement en cours...'):
-    carte = fonctionsSecheresse.create_carte_jour(type = "SOU")
-    folium_static(carte)
-        
+    gdf_sup = recup_data_arrete_du_jour()
+    latitude = 46.1
+    longitude = 2.2
+    m = folium.Map(location=[latitude, longitude], zoom_start=5)
+
+    niveaux = ['Vigilance', 'Alerte', 'Alerte renforcée', 'Crise']
+    couleurs = ['#FAED93', '#FAC939', '#FA78C5', '#FA2048']
+    couleur_map = dict(zip(niveaux, couleurs))
+
+    colonnes_selectionnees = ['id_zone',
+                                'code_zone',	
+                                'type_zone',
+                                'nom_zone' ,
+                                'geometry', 
+                                'numero_niveau',
+                                'nom_niveau',
+                                'id_arrete',
+                                'numero_arrete',
+                                'numero_arrete_cadre',
+                                'date_signature',	
+                                'debut_validite_arrete',	
+                                'fin_validite_arrete']
+    
+    colonnes_tooltip = colonnes_selectionnees.copy()
+    colonnes_tooltip.remove('geometry')
+
+    colonnes_tooltip_alias = []
+    for colonne in colonnes_tooltip:
+        colonne_alias = colonne.replace("_", " ").capitalize()
+        colonnes_tooltip_alias.append(colonne_alias)
+
+        folium.GeoJson(gdf_sup, style_function=style_function, tooltip=folium.features.GeoJsonTooltip(
+                fields=colonnes_tooltip,
+                aliases=colonnes_tooltip_alias,
+                sticky=True,
+                opacity=0.9,
+                direction='right',
+        )).add_to(m)
+    folium_static(m)    
