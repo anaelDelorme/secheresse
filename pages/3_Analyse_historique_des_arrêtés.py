@@ -5,13 +5,14 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 from pyecharts.charts import Bar
 from pyecharts import options as opts
+import requests
 
 st.set_page_config(page_title="Analyse historique des arrêtés de sécheresse", page_icon="💦")
 
 st.markdown("# Analyse historique des arrêtés de sécheresse")
 st.sidebar.header(" Analyse historique")
 st.markdown(
-    """# Evolution du nombre de jours annuels concernés par des arrêtés de sécheresse
+    """## Evolution du nombre de jours annuels concernés par des arrêtés de sécheresse
     """,
     unsafe_allow_html=True
 )
