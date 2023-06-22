@@ -18,16 +18,17 @@ st.set_page_config(page_title="Carte des arrêtés de sécheresse - eaux superfi
 st.markdown("# Eaux superficielles")
 st.sidebar.header("Eaux superficielles")
 st.markdown(
-    """Cette carte présente l'ensemble des arrêtés de sécheresse à la date de jour sur les eaux superficielles.   
-     Les arrêtés de sécheresse ont 4 niveaux d'alerte :      
-    - Vigilance <span style='background-color:#FAED93; display:inline-block; width:20px; height:20px;'></span>     
-    - Alerte <span style='background-color:#FAC939; display:inline-block; width:20px; height:20px;'></span>     
-    - Alerte renforcée <span style='background-color:#FA78C5; display:inline-block; width:20px; height:20px;'></span>    
-    - Crise <span style='background-color:#FA2048; display:inline-block; width:20px; height:20px;'></span>    
+    """Cette carte présente l'ensemble des arrêtés de sécheresse à la date de jour sur les eaux superficielles.     
+    Les arrêtés de sécheresse ont 4 niveaux d'alerte :      
+   <span style='background-color:#FAED93; display:inline-block; width:20px; height:20px;'></span> Vigilance      
+   <span style='background-color:#FAC939; display:inline-block; width:20px; height:20px;'></span> Alerte      
+   <span style='background-color:#FA78C5; display:inline-block; width:20px; height:20px;'></span> Alerte renforcée      
+   <span style='background-color:#FA2048; display:inline-block; width:20px; height:20px;'></span> Crise     
     """,
     unsafe_allow_html=True
 )
-
+progress_bar = st.sidebar.progress(0)
+status_text = st.sidebar.empty()
 data_geo_simplify = gpd.read_file("data/active_zones_simplify.json")
 arretes = pd.read_csv("https://www.data.gouv.fr/fr/datasets/r/782aac32-29c8-4b66-b231-ab4c3005f574")
 arretes_publie = arretes[arretes['statut_arrete'] == "Publié"]
