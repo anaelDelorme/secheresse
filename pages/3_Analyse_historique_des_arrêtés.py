@@ -7,6 +7,8 @@ from pyecharts.charts import Bar
 from pyecharts import options as opts
 import requests
 from streamlit_echarts import st_pyecharts
+from functools import partial
+import locale
 
 
 st.set_page_config(page_title="Analyse historique des arrêtés de sécheresse", page_icon="💦", layout="wide")
