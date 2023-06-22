@@ -7,4 +7,3 @@ pydeck
 pyecharts
 streamlit_echarts
 functools
-locale
