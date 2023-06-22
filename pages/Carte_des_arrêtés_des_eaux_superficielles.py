@@ -70,7 +70,7 @@ with st.spinner('Chargement en cours...'):
         def style_function(feature):
             alerte = feature["properties"]["nom_niveau"]
             return {
-                "fillOpacity": 0.5,
+                "fillOpacity": 0.7,
                 "weight": 0,
                 "fillColor": couleur_map.get(alerte),
                 "color": "#D9D9D9"
