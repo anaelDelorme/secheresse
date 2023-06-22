@@ -18,12 +18,11 @@ def recup_zones_actives():
 def recup_data_arrete_du_jour():
     url = "https://www.data.gouv.fr/fr/datasets/r/782aac32-29c8-4b66-b231-ab4c3005f574"
     response = requests.get(url)
-    if response.status_code == 200:
+    if response.status_code != 200:
         return("pas de connexion")
     else:
         data_geo_simplify = recup_zones_actives()
-        url = "https://www.data.gouv.fr/fr/datasets/r/782aac32-29c8-4b66-b231-ab4c3005f574"
-        arretes = pd.recup_data_arrete_du_jour(url)
+        arretes = pd.read_csv(url)
         arretes_publie = arretes[arretes['statut_arrete'] == "Publié"]
         geo_merge = data_geo_simplify.merge(arretes_publie, on = 'id_zone')
         colonnes_selectionnees = ['id_zone',

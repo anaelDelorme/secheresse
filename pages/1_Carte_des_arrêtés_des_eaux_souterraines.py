@@ -31,8 +31,5 @@ st.markdown(
 )
 with st.spinner('Chargement en cours...'):
     carte = fonctionsSecheresse.create_carte_jour(type = "SOU")
-    if carte != "erreur":
-        print("Erreur : Le fichier des arrêtés n'est pas accessible sur le site data.gouv.fr.")
-    else:
-        folium_static(carte)
+    folium_static(carte)
         
