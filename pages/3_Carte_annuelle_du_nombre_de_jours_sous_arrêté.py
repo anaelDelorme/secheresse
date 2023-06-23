@@ -32,7 +32,7 @@ start_year = 2010
 
 liste_annees = [str(year) for year in range(start_year, current_year + 1)]
 option = st.selectbox(
-    "Choisissez l'année à afficher"",
+    "Choisissez l'année à afficher",
     liste_annees)
 
 st.write('Année sélectionnée:', option)
