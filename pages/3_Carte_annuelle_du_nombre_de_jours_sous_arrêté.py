@@ -131,12 +131,13 @@ with st.spinner('Chargement en cours...'):
     min_value = gdf_selection['total_duree'].min()
     max_value = gdf_selection['total_duree'].max()
     num_elements = 6
-
+    if min_value < 0:
+        min_value = 0
     liste_chiffres = np.linspace(min_value, max_value, num_elements)
     liste_arrondie = np.round(liste_chiffres, -1).astype(int)
 
     colormap  = branca.colormap.linear.YlOrRd_09.scale(min_value, max_value )
-    colormap = colormap.to_step(index=liste_chiffres)
+    colormap = colormap.to_step(index=liste_arrondie)
     colormap.caption = 'Durée sous arrêtés par zone (en nombre de jours cumulés)'
     colormap.add_to(m)
 
