@@ -30,12 +30,12 @@ st.markdown(
 current_year = datetime.datetime.now().year
 start_year = 2010
 
-liste_annees = [str(year) for year in range(start_year, current_year + 1)]
+liste_annees = [year for year in range(start_year, current_year + 1)]
 option = st.selectbox(
     "Choisissez l'année à afficher",
     liste_annees)
 
-st.write('Année sélectionnée:', option)
+st.write('Année sélectionnée :', option)
 
 
 
@@ -103,7 +103,7 @@ with st.spinner('Chargement en cours...'):
     )
 
     data_agrege = data_agrege.reset_index(level = ['annee','id_zone'])
-    data_agrege_annee = data_agrege[data_agrege['annee'] == 2010]
+    data_agrege_annee = data_agrege[data_agrege['annee'] == option]
     
     @st.cache_data
     def recup_toutes_zones():

@@ -29,12 +29,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-current_year = datetime.datetime.now().year
-start_year = 2010
-
-
-
-
 with st.spinner('Chargement en cours...'):
     @st.cache_data
     def recup_zones_actives():
