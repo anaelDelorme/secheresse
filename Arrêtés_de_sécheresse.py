@@ -29,4 +29,4 @@ st.markdown(
 st.markdown(""" ### A propos :""")
 st.markdown(""" Site créé par 🧔 Anaël Delorme.   
             Retrouvez-moi sur: [![LinkedIn](https://www.flaticon.com/free-icon/linkedin_3536505?term=linkedin&page=1&position=1&origin=search&related_id=3536505)](https://www.linkedin.com/in/ana%C3%ABl-delorme-573b8858/)
- [![GitHub](https://badgen.net/badge/icon/GitHub?icon=github&label)](https://github.com/anaelDelorme)""", unsafe_allow_html=True)
+ [![GitHub](https://www.flaticon.com/free-icon/github_733609?term=github+logo&page=1&position=1&origin=search&related_id=733609)](https://github.com/anaelDelorme)""")
