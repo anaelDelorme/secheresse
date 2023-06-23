@@ -9,7 +9,7 @@ import folium
 import requests
 import branca
 from streamlit_folium import folium_static
-
+import datetime
 
 
 
@@ -26,6 +26,18 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+current_year = datetime.datetime.now().year
+start_year = 2010
+
+liste_annees = [str(year) for year in range(start_year, current_year + 1)]
+option = st.selectbox(
+    "Choisissez l'année à afficher"",
+    liste_annees)
+
+st.write('Année sélectionnée:', option)
+
+
 
 @st.cache_data
 def recup_data_arrete(url):

@@ -7,3 +7,4 @@ pydeck
 pyecharts
 streamlit_echarts
 branca
+datetime

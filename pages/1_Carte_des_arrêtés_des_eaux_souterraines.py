@@ -68,7 +68,7 @@ with st.spinner('Chargement en cours...'):
 
     latitude = 46.1
     longitude = 2.2
-    m = folium.Map(location=[latitude, longitude], zoom_start=5)
+    m = folium.Map(location=[latitude, longitude], zoom_start=5, tiles="cartodb positron",)
 
     niveaux = ['Vigilance', 'Alerte', 'Alerte renforcée', 'Crise']
     couleurs = ['#FAED93', '#FAC939', '#FA78C5', '#FA2048']
