@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Sécheresse en France",
-    page_icon="💦",
+    page_icon="💦")
 )
 
 st.write("# 💦 Sécheresse en France : les arrêtés! ")
