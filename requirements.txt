@@ -6,3 +6,4 @@ streamlit_folium
 pydeck
 pyecharts
 streamlit_echarts
+branca
