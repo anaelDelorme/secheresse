@@ -103,7 +103,7 @@ with st.spinner('Chargement en cours...'):
     )
 
     data_agrege = data_agrege.reset_index(level = ['annee','id_zone'])
-    data_agrege_annee = data_agrege[data_agrege['annee'] == option]
+    data_agrege_annee = data_agrege[data_agrege['annee'] == int(option)]
     
     @st.cache_data
     def recup_toutes_zones():
