@@ -133,7 +133,7 @@ with st.spinner('Chargement en cours...'):
                 return {
                     "fillOpacity": 0.7,
                     "weight": 0,
-                    "fillColor": '#gray' if nb is None else colorscale(nb),
+                    "fillColor": '#gray' if nb is None else colormap(nb),
                     "color": "#D9D9D9"
                 }    
 
