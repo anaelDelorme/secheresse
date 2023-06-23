@@ -15,7 +15,7 @@ st.set_page_config(page_title="Analyse historique des arrêtés de sécheresse",
 st.markdown("# Analyse historique des arrêtés de sécheresse")
 st.sidebar.header(" Analyse historique")
 st.markdown(
-    """## Nombre de jours annuels concernés par des arrêtés de sécheresse
+    """### Nombre de jours annuels concernés par des arrêtés de sécheresse
     """,
     unsafe_allow_html=True
 )
