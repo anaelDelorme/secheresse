@@ -159,8 +159,3 @@ with st.spinner('Chargement en cours...'):
                 )).add_to(m)
 
     folium_static(m)
-
-    
-footer_text = "Votre texte ici | Copyleft © 2023"
-st.footer(footer_text)
-    
