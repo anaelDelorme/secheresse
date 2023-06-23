@@ -28,5 +28,5 @@ st.markdown(
 
 st.markdown(""" ### A propos :""")
 st.markdown(""" Site créé par 🧔 Anaël Delorme.   
-            Retrouvez-moi sur: [![Github](https://badgen.net/badge/icon/Linkedin)](https://www.linkedin.com/in/ana%C3%ABl-delorme-573b8858/)
+            Retrouvez-moi sur: [![Github](https://badgen.net/badge/icon/Linkedin?icon=svg&label)](https://www.linkedin.com/in/ana%C3%ABl-delorme-573b8858/)
  [![LinkedIn](https://badgen.net/badge/icon/GitHub?icon=github&label)](https://github.com/anaelDelorme)""")
