@@ -136,7 +136,7 @@ with st.spinner('Chargement en cours...'):
     liste_arrondie = np.round(liste_chiffres, -1).astype(int)
 
     colormap  = branca.colormap.linear.YlOrRd_09.scale(min_value, max_value )
-    colormap = colormap.to_step(index=liste_arrondie)
+    colormap = colormap.to_step(index=liste_chiffres)
     colormap.caption = 'Durée sous arrêtés par zone (en nombre de jours cumulés)'
     colormap.add_to(m)
 
