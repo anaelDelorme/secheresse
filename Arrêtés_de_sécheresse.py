@@ -26,11 +26,7 @@ st.markdown(
 )
 
 
-st.write()
-st.write()
-st.write()
-# Ajouter les liens vers LinkedIn et GitHub avec des logos et des emojis
-st.write("Retrouvez-moi sur:")
-linkedin_link = "[![LinkedIn](https://www.flaticon.com/svg/static/icons/svg/174/174857.svg)](https://www.linkedin.com/in/ana%C3%ABl-delorme-573b8858/)"
-github_link = "[![GitHub](https://www.flaticon.com/svg/static/icons/svg/25/25231.svg)](https://github.com/anaelDelorme)"
-st.markdown(linkedin_link + " " + github_link, unsafe_allow_html=True)
+st.markdown(""" ### A propos :""")
+st.markdown(""" Site créé par 🧔 *Anaël Delorme*.    
+            Retrouvez-moi sur: [![LinkedIn](https://www.flaticon.com/free-icon/linkedin_3536505?term=linkedin&page=1&position=1&origin=search&related_id=3536505)](https://www.linkedin.com/in/ana%C3%ABl-delorme-573b8858/)"
+![GitHub](https://www.flaticon.com/free-icon/github_3291695?term=github&page=1&position=1&origin=search&related_id=3291695)](https://github.com/anaelDelorme)""""", unsafe_allow_html=True)
