@@ -90,7 +90,7 @@ with st.spinner('Chargement en cours...'):
         nombre_observations=('nom_niveau', 'size')
     )
 
-    data_agrege = data_2010_agrege.reset_index(level = ['annee','id_zone'])
+    data_agrege = data_agrege.reset_index(level = ['annee','id_zone'])
     data_agrege_annee = data_agrege[str(data_agrege['annee']) == "2010"]
     
     @st.cache_data
@@ -99,7 +99,7 @@ with st.spinner('Chargement en cours...'):
         return(zones)
     data_geo_simplify = recup_toutes_zones()
 
-    geo_merge = data_geo_simplify.merge(data_2010_agrege, on = 'id_zone')
+    geo_merge = data_geo_simplify.merge(data_agrege, on = 'id_zone')
                                        
     colonnes_selectionnees = ['id_zone','geometry', 'code_zone','nom_zone','total_duree']
     gdf_selection = geo_merge.loc[:, colonnes_selectionnees]
