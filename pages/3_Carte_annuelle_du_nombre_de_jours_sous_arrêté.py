@@ -145,7 +145,7 @@ with st.spinner('Chargement en cours...'):
                     direction='right',
                 )).add_to(m)
 
-    m
+    folium_static(m)
 
     
     
