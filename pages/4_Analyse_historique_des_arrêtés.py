@@ -76,6 +76,7 @@ with st.spinner('Chargement en cours...'):
 
     # Concaténation de tous les DataFrames avec le suffixe "_maj"
     data_tous_arretes = pd.concat(dataframes_maj, axis=0)
+    data_tous_arretes = data_tous_arretes.drop_duplicates()
 
 
     data_agrege = data_tous_arretes[data_tous_arretes['nom_niveau']!="Absence de restriction"].groupby(['annee','nom_niveau']).agg(
