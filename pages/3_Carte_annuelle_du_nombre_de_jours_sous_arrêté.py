@@ -102,7 +102,7 @@ with st.spinner('Chargement en cours...'):
     geo_merge = data_geo_simplify.merge(data_2010_agrege, on = 'id_zone')
                                        
     colonnes_selectionnees = ['id_zone','geometry', 'code_zone','nom_zone','total_duree']
-    gdf_selection = geo_merge.loc[:, colonnes_selectionnees], on = 'id_zone')
+    gdf_selection = geo_merge.loc[:, colonnes_selectionnees]
     
     latitude = 46.1
     longitude = 2.2
