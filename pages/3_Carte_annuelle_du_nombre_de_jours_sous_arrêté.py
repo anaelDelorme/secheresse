@@ -99,8 +99,8 @@ with st.spinner('Chargement en cours...'):
         return(zones)
     data_geo_simplify = recup_toutes_zones()
 
-    geo_merge = data_geo_simplify.merge(data_agrege_annee
-                                        
+    geo_merge = data_geo_simplify.merge(data_2010_agrege, on = 'id_zone')
+                                       
     colonnes_selectionnees = ['id_zone','geometry', 'code_zone','nom_zone','total_duree']
     gdf_selection = geo_merge.loc[:, colonnes_selectionnees], on = 'id_zone')
     
