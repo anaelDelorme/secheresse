@@ -54,12 +54,14 @@ with st.spinner('Chargement en cours...'):
         globals()[nom_objet] = recup_data_arrete(value)
         
     def maj_dataframe(data_frame):
-        data_frame['debut_validite_arrete'] = pd.to_datetime(data_frame['debut_validite_arrete'])
-        data_frame['fin_validite_arrete'] = pd.to_datetime(data_frame['fin_validite_arrete'])
+        data_frame['debut_validite_arrete'] = pd.to_datetime(data_frame['debut_validite_arrete'], errors='coerce')
+        data_frame['fin_validite_arrete'] = pd.to_datetime(data_frame['fin_validite_arrete'], errors='coerce')
+        data_frame = data_frame.dropna(subset=['debut_validite_arrete', 'fin_validite_arrete'])
         data_frame['duree_validite_arrete'] = (data_frame['fin_validite_arrete'] - data_frame['debut_validite_arrete']).dt.days
         data_frame['annee'] = data_frame['debut_validite_arrete'].dt.year
         data_frame = data_frame[['id_arrete', 'id_zone', 'annee', 'numero_niveau', 'nom_niveau', 'duree_validite_arrete']]
         return(data_frame)
+
 
     dataframes_maj = []
     for annee in urls.keys():
